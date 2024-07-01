@@ -1,0 +1,28 @@
+{
+  "name": "exta",
+  "version": "1.0.0",
+  "description": "File parser",
+  "main": "src/index.js",
+  "author": {
+    "name": "Radostin Romanov",
+    "url": "https://github.com/radromanov"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "dev": "pnpm build && node dist/index.js"
+  },
+  "dependencies": {
+    "tsconfig-paths": "^4.2.0",
+    "yargs": "^17.7.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.9",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.7",
+    "ts-jest": "^29.1.5",
+    "typescript": "^5.5.2"
+  }
+}
