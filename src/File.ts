@@ -1,5 +1,5 @@
 import { ALLOWED_EXTENSIONS } from "@shared/constants";
-import { lstatSync } from "fs";
+import { lstatSync, readFileSync } from "fs";
 
 export class File {
   private filepath: string;
@@ -19,6 +19,18 @@ export class File {
     if (exists) return exists;
 
     return false;
+  }
+
+  read() {
+    if (this.isFile()) {
+      const result = readFileSync(this.filepath, "utf-8");
+
+      try {
+        return JSON.parse(result);
+      } catch (error) {
+        return null;
+      }
+    }
   }
 
   private isDirectory() {

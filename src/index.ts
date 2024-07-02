@@ -11,7 +11,9 @@ cli
   .action(() => {
     const file = process.argv.slice(3).join(" ");
     const f = new File(file);
-    console.log(f.isExists());
+    const result = f.read();
+
+    if (!result) return cli.error(`error: cannot read file ${file}`);
   });
 
 cli.parse(process.argv);
