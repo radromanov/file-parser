@@ -1,9 +1,9 @@
 import { readFileSync } from "fs";
 import { ALLOWED_EXT } from "../constants/accepted-extensions";
-import { isValid } from "./is-valid";
+import { isFile } from "./is-file";
 
 export function search(filepath: string, target: string) {
-  if (!isValid(filepath)) {
+  if (!isFile(filepath)) {
     throw Error(
       `error: please provide a valid file extension (${ALLOWED_EXT.join(
         " | "
