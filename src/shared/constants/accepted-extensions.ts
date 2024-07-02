@@ -1,1 +1,1 @@
-export const ACCEPTED_EXT = ["json"];
+export const ALLOWED_EXT = ["json"];

@@ -1,4 +1,4 @@
-import { ACCEPTED_EXT } from "../constants/accepted-extensions";
+import { ALLOWED_EXT } from "../constants/accepted-extensions";
 
 export function isValid(filepath: string) {
   if (filepath.includes(".")) {
@@ -9,7 +9,7 @@ export function isValid(filepath: string) {
       return false;
     }
 
-    if (ACCEPTED_EXT.includes(ext)) {
+    if (ALLOWED_EXT.includes(ext)) {
       return true;
     }
 

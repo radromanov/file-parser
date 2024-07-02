@@ -1,5 +1,6 @@
-node_modules
-.data
+node_modules/
+.data/
 .env
-dist
+dist/
 tsconfig.tsbuildinfo
+assets/
