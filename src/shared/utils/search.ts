@@ -1,11 +1,11 @@
 import { readFileSync } from "fs";
-import { ALLOWED_EXT } from "../constants/accepted-extensions";
 import { isFile } from "./is-file";
+import { ALLOWED_EXTENSIONS } from "../constants";
 
 export function search(filepath: string, target: string) {
   if (!isFile(filepath)) {
     throw Error(
-      `error: please provide a valid file extension (${ALLOWED_EXT.join(
+      `error: please provide a valid file extension (${ALLOWED_EXTENSIONS.join(
         " | "
       )})`
     );
