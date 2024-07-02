@@ -13,8 +13,8 @@
       "@/*": ["./*"]
     },
 
-    "rootDir": "src",
-    "outDir": "dist",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "inlineSourceMap": true,
 
     "noImplicitAny": true,

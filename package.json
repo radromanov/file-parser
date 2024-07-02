@@ -1,20 +1,26 @@
 {
   "name": "exta",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "File parser",
-  "main": "src/index.js",
+  "main": "dist/exta.js",
   "author": {
     "name": "Radostin Romanov",
     "url": "https://github.com/radromanov"
   },
   "license": "MIT",
+  "bin": {
+    "exta": "./dist/exta.js"
+  },
   "scripts": {
-    "build": "rimraf dist && tsc",
-    "dev": "pnpm build && node dist/index.js"
+    "chmod": "chmod +x ./dist/exta.js",
+    "unlink:cli": "pnpm uninstall --global exta",
+    "link:cli": "pnpm unlink:cli && pnpm chmod && pnpm link --global",
+    "dev": "tsc -w"
   },
   "dependencies": {
+    "commander": "^12.1.0",
     "tsconfig-paths": "^4.2.0",
-    "yargs": "^17.7.2",
+    "winston": "^3.13.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
