@@ -5,13 +5,17 @@ import { Command } from "commander";
 import { File } from "./File";
 import { Searcher } from "./Searcher";
 import { ALLOWED_EXTENSIONS } from "./shared/constants";
-import { appendToFile, createPath } from "./shared/utils";
+import { appendToFile, collect, createPath } from "./shared/utils";
 
 const cli = new Command();
 
 cli
   .requiredOption("-s, --source <string>", "source path to search within")
-  .requiredOption("-t, --target <string>", "target word to look for")
+  .requiredOption(
+    "-t, --target <string | string[]>",
+    "target word or words to look for (comma/hyphen delimited - e.g. -t word1,word2-word3)",
+    collect
+  )
   .option("-o, --output <string>", "output directory", "./result.json");
 
 cli.parse(process.argv);
@@ -19,6 +23,8 @@ cli.parse(process.argv);
 // Exec process
 cli.action(() => {
   const { output, target } = cli.opts();
+  console.log(target);
+
   const source = createPath()[0];
   const outputPath = path.resolve(output);
 
@@ -26,9 +32,10 @@ cli.action(() => {
   const data = fileHandler.read();
 
   if (fileHandler.isFile()) {
-    const results = Searcher.exec(target, data);
-
-    appendToFile(outputPath, results);
+    for (const t of target) {
+      const results = Searcher.exec(t, data);
+      appendToFile(outputPath, results);
+    }
   } else if (fileHandler.isDirectory()) {
     for (const item of data) {
       const itemPath = path.join(source, item);
@@ -36,8 +43,11 @@ cli.action(() => {
 
       if (ALLOWED_EXTENSIONS.includes(ext)) {
         const content = new File(itemPath).read();
-        const results = Searcher.exec(target, content);
-        appendToFile(outputPath, results);
+
+        for (const t of target) {
+          const results = Searcher.exec(t, content);
+          appendToFile(outputPath, results);
+        }
       }
     }
   }
