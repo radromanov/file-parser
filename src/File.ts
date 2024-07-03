@@ -1,13 +1,9 @@
-import { ALLOWED_EXTENSIONS } from "@shared/constants";
-import { lstatSync, readFileSync } from "fs";
+import { lstatSync, readFileSync, readdirSync } from "fs";
 
 export class File {
   private filepath: string;
 
-  constructor(
-    filepath: string,
-    private readonly allowedExtensions: string[] = ALLOWED_EXTENSIONS
-  ) {
+  constructor(filepath: string) {
     this.filepath = filepath;
   }
 
@@ -30,10 +26,14 @@ export class File {
       } catch (error) {
         return null;
       }
+    } else if (this.isDirectory()) {
+      const result = readdirSync(this.filepath, "utf-8");
+
+      return result;
     }
   }
 
-  private isDirectory() {
+  isDirectory() {
     try {
       return lstatSync(this.filepath).isDirectory();
     } catch (error) {
@@ -41,7 +41,7 @@ export class File {
     }
   }
 
-  private isFile() {
+  isFile() {
     try {
       return lstatSync(this.filepath).isFile();
     } catch (error) {

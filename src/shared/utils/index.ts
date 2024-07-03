@@ -1,3 +1,4 @@
 export * from "./average";
-export * from "./is-file";
-export * from "./search";
+export * from "./append-to-file";
+export * from "./create-path";
+export * from "./read-or-create-file";
